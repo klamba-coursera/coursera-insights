@@ -1,0 +1,21 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "Next.js Dev Server",
+			"type": "shell",
+			"command": "pnpm dev",
+			"group": "build",
+			"isBackground": true,
+			"problemMatcher": []
+		},
+		{
+			"label": "Coursera Events Server",
+			"type": "shell",
+			"command": "cd coursera-events && pnpm dev",
+			"group": "build",
+			"isBackground": true,
+			"problemMatcher": []
+		}
+	]
+}
