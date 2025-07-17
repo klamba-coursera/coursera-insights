@@ -262,18 +262,24 @@ export default function EventsPage() {
 
     // Simulate redirect after 2 seconds
     setTimeout(() => {
-      // In a real app, you would redirect to the live event
-      window.open("https://coursera.org/live-event", "_blank")
+      // Redirect to our local live event page
+      window.open("http://localhost:3004", "_blank")
       setJoiningEvents(joiningEvents.filter((id) => id !== eventId))
     }, 2000)
   }
 
-  const handleEventClick = (eventUrl: string, e: React.MouseEvent) => {
+  const handleEventClick = (eventUrl: string, e: React.MouseEvent, eventId: number = 0) => {
     // Prevent navigation if clicking on button
     if ((e.target as HTMLElement).closest("button")) {
       return
     }
-    window.open(eventUrl, "_blank")
+    
+    // For the first event (How Coursera Taught Me Python), redirect to the live page
+    if (eventId === 1) {
+      window.open("http://localhost:3004", "_blank")
+    } else {
+      window.open(eventUrl, "_blank")
+    }
   }
 
   const getRegistrationCount = (eventId: number, originalCount: number) => {
@@ -438,6 +444,18 @@ export default function EventsPage() {
                       >
                         Success Shorts
                       </a>
+                      <a
+                        href="http://localhost:3004"
+                        className={`block px-4 py-2 hover:bg-gray-100 ${
+                          selectedTab === "Live Event" ? "bg-blue-50 text-blue-600" : "text-gray-700"
+                        }`}
+                        onClick={() => {
+                          setSelectedTab("Live Event")
+                          setIsInsightsDropdownOpen(false)
+                        }}
+                      >
+                        Live Event
+                      </a>
                     </div>
                   </div>
                 )}
@@ -530,7 +548,7 @@ export default function EventsPage() {
               <Card
                 key={event.id}
                 className="overflow-hidden hover:shadow-lg transition-all duration-300 cursor-pointer"
-                onClick={(e) => handleEventClick(event.eventUrl, e)}
+                onClick={(e) => handleEventClick(event.eventUrl, e, event.id)}
               >
                 <CardContent className="p-0">
                   <div className="flex">

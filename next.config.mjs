@@ -36,6 +36,14 @@ const nextConfig = {
         source: '/success-stories/:path*',
         destination: 'http://localhost:3003/:path*',
       },
+      {
+        source: '/live-event',
+        destination: 'http://localhost:3004',
+      },
+      {
+        source: '/live-event/:path*',
+        destination: 'http://localhost:3004/:path*',
+      },
     ]
   }
 }
