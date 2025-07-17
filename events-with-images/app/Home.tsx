@@ -288,15 +288,37 @@ export default function EventsPage() {
     return originalCount + (eventRegistrations[eventId] || 0)
   }
 
-  // Filter and sort events
+  // Filter and sort events by explicit order
   const filteredEvents = events
     .filter((event) => selectedCategory === "All" || event.category === selectedCategory)
     .sort((a, b) => {
-      // Live events first
-      if (a.isLive && !b.isLive) return -1
-      if (!a.isLive && b.isLive) return 1
-      // Then by earliest date
-      return a.sortDate.getTime() - b.sortDate.getTime()
+      // Custom order based on speaker names
+      const speakerOrder = [
+        "Priya Sharma",     // First
+        "Sarah Chen",       // Second
+        "Dr. Michael Rodriguez", // Third
+        "Emma Thompson",    // Fourth
+        "Alex Kumar"        // Fifth
+      ];
+      
+      // Get index of speaker in order array (if not found, return a large number)
+      const indexA = speakerOrder.indexOf(a.speaker.name);
+      const indexB = speakerOrder.indexOf(b.speaker.name);
+      
+      // If both are in the priority list, sort by priority
+      if (indexA !== -1 && indexB !== -1) {
+        return indexA - indexB;
+      }
+      // If only A is in priority list, A comes first
+      else if (indexA !== -1) {
+        return -1;
+      }
+      // If only B is in priority list, B comes first
+      else if (indexB !== -1) {
+        return 1;
+      }
+      // If neither are in priority list, sort by ID as fallback
+      return a.id - b.id;
     })
 
   return (
