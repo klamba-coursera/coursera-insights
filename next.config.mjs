@@ -13,12 +13,28 @@ const nextConfig = {
   async rewrites() {
     return [
       {
-        source: '/coursera-events',
+        source: '/events-with-images',
         destination: 'http://localhost:3001',
       },
       {
-        source: '/coursera-events/:path*',
+        source: '/events-with-images/:path*',
         destination: 'http://localhost:3001/:path*',
+      },
+      {
+        source: '/coursera-community',
+        destination: 'http://localhost:3002',
+      },
+      {
+        source: '/coursera-community/:path*',
+        destination: 'http://localhost:3002/:path*',
+      },
+      {
+        source: '/success-stories',
+        destination: 'http://localhost:3003',
+      },
+      {
+        source: '/success-stories/:path*',
+        destination: 'http://localhost:3003/:path*',
       },
     ]
   }

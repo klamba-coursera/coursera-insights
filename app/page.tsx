@@ -241,13 +241,20 @@ export default function CourseraHomepage() {
                   Careers
                 </a>
                 <div className="relative">
-                  <button
-                    onClick={() => setIsInsightsDropdownOpen(!isInsightsDropdownOpen)}
-                    className="text-gray-700 hover:text-blue-600 font-medium pb-4 flex items-center space-x-1"
-                  >
-                    <span>Insights</span>
-                    <ChevronDown className="w-4 h-4" />
-                  </button>
+                  <div className="flex items-center">
+                    <a
+                      href="http://localhost:3000"
+                      className="text-gray-700 hover:text-blue-600 font-medium pb-4"
+                    >
+                      <span>Insights</span>
+                    </a>
+                    <button
+                      onClick={() => setIsInsightsDropdownOpen(!isInsightsDropdownOpen)}
+                      className="ml-1 p-1 focus:outline-none"
+                    >
+                      <ChevronDown className="w-4 h-4 text-gray-700 hover:text-blue-600" />
+                    </button>
+                  </div>
                   {isInsightsDropdownOpen && (
                     <div className="absolute top-full left-0 mt-1 w-48 bg-white border border-gray-200 rounded-lg shadow-lg z-50">
                       <div className="py-2">
@@ -263,39 +270,30 @@ export default function CourseraHomepage() {
                         >
                           Events
                         </a>
-                        <button
-                          onClick={() => {
-                            setSelectedTab("Roadmaps")
-                            setIsInsightsDropdownOpen(false)
-                          }}
-                          className={`w-full text-left px-4 py-2 hover:bg-gray-100 ${
-                            selectedTab === "Roadmaps" ? "bg-blue-50 text-blue-600" : "text-gray-700"
+                        <a
+                          href="http://localhost:3002"
+                          className={`block px-4 py-2 hover:bg-gray-100 ${
+                            selectedTab === "Community" ? "bg-blue-50 text-blue-600" : "text-gray-700"
                           }`}
-                        >
-                          Roadmaps
-                        </button>
-                        <button
                           onClick={() => {
                             setSelectedTab("Community")
                             setIsInsightsDropdownOpen(false)
                           }}
-                          className={`w-full text-left px-4 py-2 hover:bg-gray-100 ${
-                            selectedTab === "Community" ? "bg-blue-50 text-blue-600" : "text-gray-700"
-                          }`}
                         >
                           Community
-                        </button>
-                        <button
+                        </a>
+                        <a
+                          href="http://localhost:3003"
+                          className={`block px-4 py-2 hover:bg-gray-100 ${
+                            selectedTab === "Success Shorts" ? "bg-blue-50 text-blue-600" : "text-gray-700"
+                          }`}
                           onClick={() => {
-                            setSelectedTab("Success Stories")
+                            setSelectedTab("Success Shorts")
                             setIsInsightsDropdownOpen(false)
                           }}
-                          className={`w-full text-left px-4 py-2 hover:bg-gray-100 ${
-                            selectedTab === "Success Stories" ? "bg-blue-50 text-blue-600" : "text-gray-700"
-                          }`}
                         >
-                          Success Stories
-                        </button>
+                          Success Shorts
+                        </a>
                       </div>
                     </div>
                   )}

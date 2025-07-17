@@ -1,7 +1,8 @@
 "use client"
 
 import { Badge } from "@/components/ui/badge"
-import { ChevronDown, Users, TrendingUp, Play } from "lucide-react"
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+import { ChevronDown, Users, TrendingUp, Play, Globe, Bell } from "lucide-react"
 import { useState } from "react"
 import SuccessShorts from "./SuccessShorts"
 
@@ -63,42 +64,15 @@ export default function HomePage() {
 
             {/* Right side - Icons and Profile */}
             <div className="flex items-center space-x-4">
-              {/* Globe icon */}
-              <button className="p-2 hover:bg-gray-100 rounded">
-                <svg className="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9v-9m0-9v9m0 9c-5 0-9-4-9-9s4-9 9-9"
-                  />
-                </svg>
-              </button>
-
-              {/* Notification bell */}
-              <button className="p-2 hover:bg-gray-100 rounded">
-                <svg className="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"
-                  />
-                </svg>
-              </button>
-
-              {/* User avatar with ONLINE badge */}
+              <Globe className="w-6 h-6 text-gray-600 hover:text-blue-600 cursor-pointer" />
+              <Bell className="w-6 h-6 text-gray-600 hover:text-blue-600 cursor-pointer" />
               <div className="relative">
-                <div className="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center">
-                  <span className="text-white text-sm font-medium">👤</span>
-                </div>
+                <Avatar className="w-8 h-8 cursor-pointer">
+                  <AvatarImage src="/profile-image.jpeg" alt="User profile" />
+                  <AvatarFallback className="bg-blue-600 text-white">P</AvatarFallback>
+                </Avatar>
                 <div className="absolute -bottom-1 -right-1 bg-green-500 text-white text-xs px-1 rounded">ONLINE</div>
               </div>
-
-              {/* Profile icon */}
-              <button className="w-8 h-8 bg-gray-800 text-white rounded-full flex items-center justify-center hover:bg-gray-700">
-                <span className="text-sm font-medium">P</span>
-              </button>
             </div>
           </div>
 
@@ -130,60 +104,59 @@ export default function HomePage() {
                 Careers
               </a>
               <div className="relative">
-                <button
-                  onClick={() => setIsInsightsDropdownOpen(!isInsightsDropdownOpen)}
-                  className="py-4 px-1 border-b-2 border-blue-600 text-blue-600 font-medium flex items-center space-x-1"
-                >
-                  <span>Insights</span>
-                  <ChevronDown className="w-4 h-4" />
-                </button>
+                <div className="flex items-center">
+                  <a
+                    href="http://localhost:3000"
+                    className="py-4 px-1 border-b-2 border-blue-600 text-blue-600 font-medium"
+                  >
+                    <span>Insights</span>
+                  </a>
+                  <button
+                    onClick={() => setIsInsightsDropdownOpen(!isInsightsDropdownOpen)}
+                    className="ml-1 p-1 focus:outline-none"
+                  >
+                    <ChevronDown className="w-4 h-4 text-blue-600" />
+                  </button>
+                </div>
                 {isInsightsDropdownOpen && (
                   <div className="absolute top-full left-0 mt-1 w-48 bg-white border border-gray-200 rounded-lg shadow-lg z-50">
                     <div className="py-2">
-                      <button
+                      <a
+                        href="http://localhost:3001"
+                        className={`block px-4 py-2 hover:bg-gray-100 ${
+                          selectedTab === "Events" ? "bg-blue-50 text-blue-600" : "text-gray-700"
+                        }`}
                         onClick={() => {
                           setSelectedTab("Events")
                           setIsInsightsDropdownOpen(false)
                         }}
-                        className={`w-full text-left px-4 py-2 hover:bg-gray-100 ${
-                          selectedTab === "Events" ? "bg-blue-50 text-blue-600" : "text-gray-700"
-                        }`}
                       >
                         Events
-                      </button>
-                      <button
-                        onClick={() => {
-                          setSelectedTab("Roadmaps")
-                          setIsInsightsDropdownOpen(false)
-                        }}
-                        className={`w-full text-left px-4 py-2 hover:bg-gray-100 ${
-                          selectedTab === "Roadmaps" ? "bg-blue-50 text-blue-600" : "text-gray-700"
+                      </a>
+                      <a
+                        href="http://localhost:3002"
+                        className={`block px-4 py-2 hover:bg-gray-100 ${
+                          selectedTab === "Community" ? "bg-blue-50 text-blue-600" : "text-gray-700"
                         }`}
-                      >
-                        Roadmaps
-                      </button>
-                      <button
                         onClick={() => {
                           setSelectedTab("Community")
                           setIsInsightsDropdownOpen(false)
                         }}
-                        className={`w-full text-left px-4 py-2 hover:bg-gray-100 ${
-                          selectedTab === "Community" ? "bg-blue-50 text-blue-600" : "text-gray-700"
-                        }`}
                       >
                         Community
-                      </button>
-                      <button
+                      </a>
+                      <a
+                        href="http://localhost:3003"
+                        className={`block px-4 py-2 hover:bg-gray-100 ${
+                          selectedTab === "Success Shorts" ? "bg-blue-50 text-blue-600" : "text-gray-700"
+                        }`}
                         onClick={() => {
                           setSelectedTab("Success Shorts")
                           setIsInsightsDropdownOpen(false)
                         }}
-                        className={`w-full text-left px-4 py-2 hover:bg-gray-100 ${
-                          selectedTab === "Success Shorts" ? "bg-blue-50 text-blue-600" : "text-gray-700"
-                        }`}
                       >
                         Success Shorts
-                      </button>
+                      </a>
                     </div>
                   </div>
                 )}
