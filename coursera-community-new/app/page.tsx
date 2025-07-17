@@ -89,120 +89,16 @@ const categories = [
   { name: "Course Discussion", count: 1104 }
 ]
 
+// Import StandardHeader component
+import { StandardHeader } from "@/components/ui/header"
+
 export default function CommunityPage() {
-  const [isInsightsDropdownOpen, setIsInsightsDropdownOpen] = useState(false)
-  const [selectedTab, setSelectedTab] = useState("Community")
   const [selectedCategory, setSelectedCategory] = useState("All Topics")
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-50">
-      {/* Header */}
-      <header className="bg-white border-b">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-16">
-            {/* Left side - Logo, Explore */}
-            <div className="flex items-center space-x-4">
-              <div className="flex items-center">
-                <span className="text-2xl font-bold text-blue-600">coursera</span>
-              </div>
-
-              <button className="flex items-center space-x-1 px-4 py-2 border border-gray-300 rounded hover:bg-gray-50">
-                <span className="text-blue-600 font-medium">Explore</span>
-                <ChevronDown className="w-4 h-4 text-blue-600" />
-              </button>
-            </div>
-
-            {/* Right side - Icons and Profile */}
-            <div className="flex items-center space-x-4">
-              <Globe className="w-6 h-6 text-gray-600 hover:text-blue-600 cursor-pointer" />
-              <Bell className="w-6 h-6 text-gray-600 hover:text-blue-600 cursor-pointer" />
-              <div className="relative">
-                <Avatar className="w-8 h-8 cursor-pointer">
-                  <AvatarImage src="/profile-image.jpeg" alt="User profile" />
-                  <AvatarFallback className="bg-blue-600 text-white">P</AvatarFallback>
-                </Avatar>
-                <div className="absolute -bottom-1 -right-1 bg-green-500 text-white text-xs px-1 rounded">ONLINE</div>
-              </div>
-            </div>
-          </div>
-
-          {/* Navigation Bar */}
-          <div className="border-t">
-            <nav className="flex space-x-8">
-              <a
-                href="/"
-                className="py-4 px-1 border-b-2 border-transparent text-gray-700 hover:text-blue-600 font-medium"
-              >
-                Home
-              </a>
-              <a
-                href="#"
-                className="py-4 px-1 border-b-2 border-transparent text-gray-700 hover:text-blue-600 font-medium"
-              >
-                My Learning
-              </a>
-              <a
-                href="#"
-                className="py-4 px-1 border-b-2 border-transparent text-gray-700 hover:text-blue-600 font-medium"
-              >
-                Online Degrees
-              </a>
-              <a
-                href="#"
-                className="py-4 px-1 border-b-2 border-transparent text-gray-700 hover:text-blue-600 font-medium"
-              >
-                Careers
-              </a>
-              <div className="relative">
-                <div className="flex items-center">
-                  <a
-                    href="http://localhost:3000"
-                    className="py-4 px-1 border-b-2 border-blue-600 text-blue-600 font-medium"
-                  >
-                    <span>Insights</span>
-                  </a>
-                  <button
-                    onClick={() => setIsInsightsDropdownOpen(!isInsightsDropdownOpen)}
-                    className="ml-1 p-1 focus:outline-none"
-                  >
-                    <ChevronDown className="w-4 h-4 text-blue-600" />
-                  </button>
-                </div>
-                {isInsightsDropdownOpen && (
-                  <div className="absolute top-full left-0 mt-1 w-48 bg-white border border-gray-200 rounded-lg shadow-lg z-50">
-                    <div className="py-2">
-                      <a
-                        href="http://localhost:3001"
-                        className={`block px-4 py-2 hover:bg-gray-100 ${
-                          selectedTab === "Events" ? "bg-blue-50 text-blue-600" : "text-gray-700"
-                        }`}
-                      >
-                        Events
-                      </a>
-                      <a
-                        href="http://localhost:3002"
-                        className={`block px-4 py-2 hover:bg-gray-100 ${
-                          selectedTab === "Community" ? "bg-blue-50 text-blue-600" : "text-gray-700"
-                        }`}
-                      >
-                        Community
-                      </a>
-                      <a
-                        href="http://localhost:3003"
-                        className={`block px-4 py-2 hover:bg-gray-100 ${
-                          selectedTab === "Success Shorts" ? "bg-blue-50 text-blue-600" : "text-gray-700"
-                        }`}
-                      >
-                        Success Shorts
-                      </a>
-                    </div>
-                  </div>
-                )}
-              </div>
-            </nav>
-          </div>
-        </div>
-      </header>
+      {/* Using standardized header component */}
+      <StandardHeader activeTab="Community" />
 
       {/* Community Banner */}
       <section className="bg-blue-900 py-8 px-4 flex items-center justify-center">

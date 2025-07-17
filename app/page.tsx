@@ -7,6 +7,7 @@ import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+import { StandardHeader } from "@/components/ui/header"
 import {
   Calendar,
   Clock,
@@ -215,121 +216,8 @@ export default function CourseraHomepage() {
 
   return (
     <div className="min-h-screen bg-white">
-      {/* Fixed Header */}
-      <header className="fixed top-0 left-0 right-0 bg-white border-b border-gray-200 z-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-16">
-            {/* Left side - Logo and Navigation */}
-            <div className="flex items-center space-x-8">
-              <div className="flex items-center space-x-2">
-                <Menu className="w-6 h-6 text-blue-600" />
-                <div className="text-2xl font-bold text-blue-600">coursera</div>
-              </div>
-
-              {/* Navigation */}
-              <nav className="hidden md:flex space-x-6">
-                <a href="#" className="text-blue-600 font-medium border-b-2 border-blue-600 pb-4">
-                  Home
-                </a>
-                <a href="#" className="text-gray-700 hover:text-blue-600 font-medium pb-4">
-                  My Learning
-                </a>
-                <a href="#" className="text-gray-700 hover:text-blue-600 font-medium pb-4">
-                  Online Degrees
-                </a>
-                <a href="#" className="text-gray-700 hover:text-blue-600 font-medium pb-4">
-                  Careers
-                </a>
-                <div className="relative">
-                  <div className="flex items-center">
-                    <a
-                      href="http://localhost:3000"
-                      className="text-gray-700 hover:text-blue-600 font-medium pb-4"
-                    >
-                      <span>Insights</span>
-                    </a>
-                    <button
-                      onClick={() => setIsInsightsDropdownOpen(!isInsightsDropdownOpen)}
-                      className="ml-1 p-1 focus:outline-none"
-                    >
-                      <ChevronDown className="w-4 h-4 text-gray-700 hover:text-blue-600" />
-                    </button>
-                  </div>
-                  {isInsightsDropdownOpen && (
-                    <div className="absolute top-full left-0 mt-1 w-48 bg-white border border-gray-200 rounded-lg shadow-lg z-50">
-                      <div className="py-2">
-                        <a
-                          href="http://localhost:3001"
-                          className={`block px-4 py-2 hover:bg-gray-100 ${
-                            selectedTab === "Events" ? "bg-blue-50 text-blue-600" : "text-gray-700"
-                          }`}
-                          onClick={() => {
-                            setSelectedTab("Events")
-                            setIsInsightsDropdownOpen(false)
-                          }}
-                        >
-                          Events
-                        </a>
-                        <a
-                          href="http://localhost:3002"
-                          className={`block px-4 py-2 hover:bg-gray-100 ${
-                            selectedTab === "Community" ? "bg-blue-50 text-blue-600" : "text-gray-700"
-                          }`}
-                          onClick={() => {
-                            setSelectedTab("Community")
-                            setIsInsightsDropdownOpen(false)
-                          }}
-                        >
-                          Community
-                        </a>
-                        <a
-                          href="http://localhost:3003"
-                          className={`block px-4 py-2 hover:bg-gray-100 ${
-                            selectedTab === "Success Shorts" ? "bg-blue-50 text-blue-600" : "text-gray-700"
-                          }`}
-                          onClick={() => {
-                            setSelectedTab("Success Shorts")
-                            setIsInsightsDropdownOpen(false)
-                          }}
-                        >
-                          Success Shorts
-                        </a>
-                      </div>
-                    </div>
-                  )}
-                </div>
-              </nav>
-            </div>
-
-            {/* Center - Search */}
-            <div className="flex-1 max-w-lg mx-8">
-              <div className="relative">
-                <input
-                  type="text"
-                  placeholder="What do you want to learn?"
-                  className="w-full pl-4 pr-12 py-2 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                />
-                <button className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-blue-600 text-white p-2 rounded-full hover:bg-blue-700">
-                  <Search className="w-4 h-4" />
-                </button>
-              </div>
-            </div>
-
-            {/* Right side - Icons and Profile */}
-            <div className="flex items-center space-x-4">
-              <Globe className="w-6 h-6 text-gray-600 hover:text-blue-600 cursor-pointer" />
-              <Bell className="w-6 h-6 text-gray-600 hover:text-blue-600 cursor-pointer" />
-              <div className="relative">
-                <Avatar className="w-8 h-8 cursor-pointer">
-                  <AvatarImage src="/profile-image.jpeg" alt="User profile" />
-                  <AvatarFallback className="bg-blue-600 text-white">P</AvatarFallback>
-                </Avatar>
-                <div className="absolute -bottom-1 -right-1 bg-green-500 text-white text-xs px-1 rounded">ONLINE</div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </header>
+      {/* Using standardized header component */}
+      <StandardHeader activeTab="Insights" />
 
       {/* Main Content */}
       <main className="pt-16">

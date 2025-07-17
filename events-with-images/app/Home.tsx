@@ -35,30 +35,6 @@ const events = [
     eventUrl: "https://coursera.org/events/python-career-switch",
   },
   {
-    id: 2,
-    title: "My First ML App: Applying Coursera's TensorFlow Specialization in the Real World",
-    thumbnail: "/images/thumbnail-2.png",
-    speaker: {
-      name: "Sarah Chen",
-      designation: "Machine Learning Engineer at DataCorp",
-      image: "/images/authors/user5.png",
-    },
-    date: "July 16, 2025",
-    time: "6:30 PM EST",
-    duration: "1 hour",
-    registered: 892,
-    category: "Data Science",
-    level: "Intermediate",
-    relatedCourse: "TensorFlow Developer Professional Certificate",
-    description:
-      "Sarah shares how she built her first machine learning application using skills from Coursera's TensorFlow specialization.",
-    tags: ["Machine Learning", "TensorFlow", "Real-world Application"],
-    isLive: false,
-    isFeatured: false,
-    sortDate: new Date("2025-07-16T18:30:00"),
-    eventUrl: "https://coursera.org/events/first-ml-app",
-  },
-  {
     id: 3,
     title: "Designing User-Centric Products: My Journey Through Coursera's HCI Track",
     thumbnail: "/images/thumbnail-3.png",
@@ -67,7 +43,7 @@ const events = [
       designation: "Senior UX Designer at Airbnb",
       image: "/images/authors/user3.png",
     },
-    date: "July 18, 2025",
+    date: "July 28, 2025",
     time: "8:00 PM EST",
     duration: "50 mins",
     registered: 2156,
@@ -163,7 +139,7 @@ const events = [
       designation: "Strategy Consultant at McKinsey & Company",
       image: "/images/authors/user2.png",
     },
-    date: "July 15, 2025",
+    date: "July 25, 2025",
     time: "5:30 PM EST",
     duration: "55 mins",
     registered: 1876,
@@ -187,7 +163,7 @@ const events = [
       designation: "IT Support Specialist at TechStart",
       image: "/images/authors/user1.png",
     },
-    date: "July 19, 2025",
+    date: "July 29, 2025",
     time: "6:45 PM EST",
     duration: "30 mins",
     registered: 1234,
@@ -201,6 +177,30 @@ const events = [
     isFeatured: false,
     sortDate: new Date("2025-07-19T18:45:00"),
     eventUrl: "https://coursera.org/events/first-it-job",
+  },
+  {
+    id: 2,
+    title: "My First ML App: Applying Coursera's TensorFlow Specialization in the Real World",
+    thumbnail: "/images/thumbnail-2.png",
+    speaker: {
+      name: "Sarah Chen",
+      designation: "Machine Learning Engineer at DataCorp",
+      image: "/images/authors/user5.png",
+    },
+    date: "July 16, 2025",
+    time: "6:30 PM EST",
+    duration: "1 hour",
+    registered: 892,
+    category: "Data Science",
+    level: "Intermediate",
+    relatedCourse: "TensorFlow Developer Professional Certificate",
+    description:
+      "Sarah shares how she built her first machine learning application using skills from Coursera's TensorFlow specialization.",
+    tags: ["Machine Learning", "TensorFlow", "Real-world Application"],
+    isLive: false,
+    isFeatured: false,
+    sortDate: new Date("2025-07-16T18:30:00"),
+    eventUrl: "https://coursera.org/events/first-ml-app",
   },
 ]
 
@@ -228,12 +228,14 @@ const categories = [
   },
 ]
 
+// Import the StandardHeader component
+import { StandardHeader } from "@/components/ui/header"
+
 export default function EventsPage() {
   const [selectedCategory, setSelectedCategory] = useState("All")
   const [registeredEvents, setRegisteredEvents] = useState<number[]>([])
   const [selectedTab, setSelectedTab] = useState("Events")
   const [eventRegistrations, setEventRegistrations] = useState<{ [key: number]: number }>({})
-  const [isInsightsDropdownOpen, setIsInsightsDropdownOpen] = useState(false)
   const [joiningEvents, setJoiningEvents] = useState<number[]>([])
 
   const isRegistered = (eventId: number) => registeredEvents.includes(eventId)
@@ -299,171 +301,8 @@ export default function EventsPage() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-50">
-      {/* New Coursera Header */}
-      <header className="bg-white border-b">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-16">
-            {/* Left side - Menu, Logo, Explore */}
-            <div className="flex items-center space-x-4">
-              {/* Menu icon */}
-              <button className="p-2 hover:bg-gray-100 rounded">
-                <div className="grid grid-cols-3 gap-1 w-4 h-4">
-                  {[...Array(9)].map((_, i) => (
-                    <div key={i} className="w-1 h-1 bg-gray-600 rounded-full"></div>
-                  ))}
-                </div>
-              </button>
-
-              {/* Coursera Logo */}
-              <div className="flex items-center">
-                <span className="text-2xl font-bold text-blue-600">coursera</span>
-              </div>
-
-              {/* Explore Button */}
-              <button className="flex items-center space-x-1 px-4 py-2 border border-gray-300 rounded hover:bg-gray-50">
-                <span className="text-blue-600 font-medium">Explore</span>
-                <svg className="w-4 h-4 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                </svg>
-              </button>
-            </div>
-
-            {/* Center - Search Bar */}
-            <div className="flex-1 max-w-2xl mx-8">
-              <div className="relative">
-                <input
-                  type="text"
-                  placeholder="What do you want to learn?"
-                  className="w-full px-4 py-2 pr-12 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                />
-                <button className="absolute right-2 top-1/2 transform -translate-y-1/2 p-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">
-                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-                    />
-                  </svg>
-                </button>
-              </div>
-            </div>
-
-            {/* Right side - Icons and Profile */}
-            <div className="flex items-center space-x-4">
-              <Globe className="w-6 h-6 text-gray-600 hover:text-blue-600 cursor-pointer" />
-              <Bell className="w-6 h-6 text-gray-600 hover:text-blue-600 cursor-pointer" />
-              <div className="relative">
-                <Avatar className="w-8 h-8 cursor-pointer">
-                  <AvatarImage src="/profile-image.jpeg" alt="User profile" />
-                  <AvatarFallback className="bg-blue-600 text-white">P</AvatarFallback>
-                </Avatar>
-                <div className="absolute -bottom-1 -right-1 bg-green-500 text-white text-xs px-1 rounded">ONLINE</div>
-              </div>
-            </div>
-          </div>
-
-          {/* Navigation Bar */}
-          <div className="border-t">
-            <nav className="flex space-x-8">
-              <a
-                href="#"
-                className="py-4 px-1 border-b-2 border-transparent text-gray-700 hover:text-blue-600 font-medium"
-              >
-                Home
-              </a>
-              <a
-                href="#"
-                className="py-4 px-1 border-b-2 border-transparent text-gray-700 hover:text-blue-600 font-medium"
-              >
-                My Learning
-              </a>
-              <a
-                href="#"
-                className="py-4 px-1 border-b-2 border-transparent text-gray-700 hover:text-blue-600 font-medium"
-              >
-                Online Degrees
-              </a>
-              <a
-                href="#"
-                className="py-4 px-1 border-b-2 border-transparent text-gray-700 hover:text-blue-600 font-medium"
-              >
-                Careers
-              </a>
-              <div className="relative">
-                <div className="flex items-center">
-                  <a
-                    href="http://localhost:3000"
-                    className="py-4 px-1 border-b-2 border-blue-600 text-blue-600 font-medium"
-                  >
-                    <span>Insights</span>
-                  </a>
-                  <button
-                    onClick={() => setIsInsightsDropdownOpen(!isInsightsDropdownOpen)}
-                    className="ml-1 p-1 focus:outline-none"
-                  >
-                    <ChevronDown className="w-4 h-4 text-blue-600" />
-                  </button>
-                </div>
-                {isInsightsDropdownOpen && (
-                  <div className="absolute top-full left-0 mt-1 w-48 bg-white border border-gray-200 rounded-lg shadow-lg z-50">
-                    <div className="py-2">
-                      <a
-                        href="http://localhost:3001"
-                        className={`block px-4 py-2 hover:bg-gray-100 ${
-                          selectedTab === "Events" ? "bg-blue-50 text-blue-600" : "text-gray-700"
-                        }`}
-                        onClick={() => {
-                          setSelectedTab("Events")
-                          setIsInsightsDropdownOpen(false)
-                        }}
-                      >
-                        Events
-                      </a>
-                      <a
-                        href="http://localhost:3002"
-                        className={`block px-4 py-2 hover:bg-gray-100 ${
-                          selectedTab === "Community" ? "bg-blue-50 text-blue-600" : "text-gray-700"
-                        }`}
-                        onClick={() => {
-                          setSelectedTab("Community")
-                          setIsInsightsDropdownOpen(false)
-                        }}
-                      >
-                        Community
-                      </a>
-                      <a
-                        href="http://localhost:3003"
-                        className={`block px-4 py-2 hover:bg-gray-100 ${
-                          selectedTab === "Success Shorts" ? "bg-blue-50 text-blue-600" : "text-gray-700"
-                        }`}
-                        onClick={() => {
-                          setSelectedTab("Success Shorts")
-                          setIsInsightsDropdownOpen(false)
-                        }}
-                      >
-                        Success Shorts
-                      </a>
-                      <a
-                        href="http://localhost:3004"
-                        className={`block px-4 py-2 hover:bg-gray-100 ${
-                          selectedTab === "Live Event" ? "bg-blue-50 text-blue-600" : "text-gray-700"
-                        }`}
-                        onClick={() => {
-                          setSelectedTab("Live Event")
-                          setIsInsightsDropdownOpen(false)
-                        }}
-                      >
-                        Live Event
-                      </a>
-                    </div>
-                  </div>
-                )}
-              </div>
-            </nav>
-          </div>
-        </div>
-      </header>
+      {/* Using standardized header component */}
+      <StandardHeader activeTab="Events" />
 
       {/* Blue Banner Strip */}
       <section className="bg-blue-900 py-8 px-4 flex items-center justify-center">

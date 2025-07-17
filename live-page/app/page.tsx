@@ -6,6 +6,7 @@ import { VideoSection } from "@/components/video-section"
 import { ContentTabs } from "@/components/content-tabs"
 import { DetailedRoadmap } from "@/components/detailed-roadmap"
 import { DiscussionForum } from "@/components/discussion-forum"
+import { StandardHeader } from "@/components/ui/header"
 
 export default function EventsPage() {
   const [selectedCourse, setSelectedCourse] = useState("course-1")
@@ -37,23 +38,25 @@ export default function EventsPage() {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      {/* Header */}
-      <header className="bg-white border-b border-gray-200 px-6 py-4">
+      {/* Using standardized header component */}
+      <StandardHeader activeTab="Live Event" />
+      
+      {/* Event Title Bar */}
+      <div className="bg-white border-b border-gray-200 px-6 py-4">
         <div className="flex items-center justify-between">
           <div className="flex items-center space-x-4">
             <div className="flex items-center space-x-2">
-              <div className="text-blue-600 font-bold text-xl">coursera</div>
               <div className="text-gray-400">|</div>
               <div className="text-gray-600">DeepLearning.AI</div>
             </div>
           </div>
           <div className="flex items-center space-x-4">
             <span className="text-sm text-gray-600">
-              Viewing: Deep Learning Specialization Live Event - January 15, 2024
+              Viewing: Deep Learning Specialization Live Event - July 17, 2025
             </span>
           </div>
         </div>
-      </header>
+      </div>
 
       <div className="flex">
         <Sidebar
