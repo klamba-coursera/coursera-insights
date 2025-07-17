@@ -1,5 +1,6 @@
 "use client"
 
+import type React from "react"
 import { useState } from "react"
 import Link from "next/link"
 import { Badge } from "@/components/ui/badge"
@@ -19,8 +20,9 @@ import {
   Bell,
   Menu,
   ChevronDown,
+  ArrowUp,
 } from "lucide-react"
-import { DropdownMenu, DropdownMenuContent, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
+
 
 const events = [
   {
@@ -208,7 +210,8 @@ const courses = [
 ]
 
 export default function CourseraHomepage() {
-  const [isInsightsOpen, setIsInsightsOpen] = useState(false)
+  const [isInsightsDropdownOpen, setIsInsightsDropdownOpen] = useState(false)
+  const [selectedTab, setSelectedTab] = useState("Events")
 
   return (
     <div className="min-h-screen bg-white">
@@ -234,139 +237,69 @@ export default function CourseraHomepage() {
                 <a href="#" className="text-gray-700 hover:text-blue-600 font-medium pb-4">
                   Online Degrees
                 </a>
-                <a href="http://localhost:3001" className="text-gray-700 hover:text-blue-600 font-medium pb-4">
+                <a href="#" className="text-gray-700 hover:text-blue-600 font-medium pb-4">
                   Careers
                 </a>
-
-                {/* Insights Dropdown */}
-                <DropdownMenu open={isInsightsOpen} onOpenChange={setIsInsightsOpen}>
-                  <DropdownMenuTrigger asChild>
-                    <button className="flex items-center space-x-1 text-gray-700 hover:text-blue-600 font-medium pb-4">
-                      <span>Insights</span>
-                      <ChevronDown className="w-4 h-4" />
-                    </button>
-                  </DropdownMenuTrigger>
-                  <DropdownMenuContent className="w-[800px] p-0" align="start">
-                    <div className="bg-gradient-to-br from-blue-50 to-indigo-50 p-6">
-                      <div className="flex items-center space-x-4 mb-6">
-                        <div className="w-12 h-12 bg-blue-600 rounded-lg flex items-center justify-center">
-                          <BookOpen className="w-6 h-6 text-white" />
-                        </div>
-                        <div>
-                          <h1 className="text-xl font-bold text-gray-900">Coursera Insights</h1>
-                          <p className="text-sm text-gray-600">Talent In Action</p>
-                        </div>
-                      </div>
-
-                      <nav className="flex space-x-8 mb-6">
-                        <a href="http://localhost:3001" className="text-blue-600 font-medium border-b-2 border-blue-600 pb-1">
+                <div className="relative">
+                  <button
+                    onClick={() => setIsInsightsDropdownOpen(!isInsightsDropdownOpen)}
+                    className="text-gray-700 hover:text-blue-600 font-medium pb-4 flex items-center space-x-1"
+                  >
+                    <span>Insights</span>
+                    <ChevronDown className="w-4 h-4" />
+                  </button>
+                  {isInsightsDropdownOpen && (
+                    <div className="absolute top-full left-0 mt-1 w-48 bg-white border border-gray-200 rounded-lg shadow-lg z-50">
+                      <div className="py-2">
+                        <a
+                          href="http://localhost:3001"
+                          className={`block px-4 py-2 hover:bg-gray-100 ${
+                            selectedTab === "Events" ? "bg-blue-50 text-blue-600" : "text-gray-700"
+                          }`}
+                          onClick={() => {
+                            setSelectedTab("Events")
+                            setIsInsightsDropdownOpen(false)
+                          }}
+                        >
                           Events
                         </a>
-                        <a href="#" className="text-gray-700 hover:text-blue-600 font-medium">
-                          Success Stories
-                        </a>
-                        <a href="#" className="text-gray-700 hover:text-blue-600 font-medium">
+                        <button
+                          onClick={() => {
+                            setSelectedTab("Roadmaps")
+                            setIsInsightsDropdownOpen(false)
+                          }}
+                          className={`w-full text-left px-4 py-2 hover:bg-gray-100 ${
+                            selectedTab === "Roadmaps" ? "bg-blue-50 text-blue-600" : "text-gray-700"
+                          }`}
+                        >
                           Roadmaps
-                        </a>
-                        <a href="#" className="text-gray-700 hover:text-blue-600 font-medium">
+                        </button>
+                        <button
+                          onClick={() => {
+                            setSelectedTab("Community")
+                            setIsInsightsDropdownOpen(false)
+                          }}
+                          className={`w-full text-left px-4 py-2 hover:bg-gray-100 ${
+                            selectedTab === "Community" ? "bg-blue-50 text-blue-600" : "text-gray-700"
+                          }`}
+                        >
                           Community
-                        </a>
-                      </nav>
-
-                      {/* Featured Events */}
-                      <div className="grid gap-4 md:grid-cols-2">
-                        {events.slice(0, 4).map((event) => (
-                          <Card key={event.id} className="bg-white">
-                            <CardHeader className="pb-3">
-                              <div className="flex items-start justify-between">
-                                <div className="flex-1">
-                                  <CardTitle className="text-sm font-semibold line-clamp-2 mb-2">
-                                    {event.title}
-                                  </CardTitle>
-                                  <div className="flex items-center space-x-2 mb-2">
-                                    <Avatar className="w-6 h-6">
-                                      <AvatarImage src={event.speaker.image || "/placeholder.svg"} />
-                                      <AvatarFallback>
-                                        {event.speaker.name
-                                          .split(" ")
-                                          .map((n) => n[0])
-                                          .join("")}
-                                      </AvatarFallback>
-                                    </Avatar>
-                                    <div className="text-xs text-gray-600">
-                                      <div className="font-medium">{event.speaker.name}</div>
-                                      <div className="text-xs">{event.speaker.designation}</div>
-                                    </div>
-                                  </div>
-                                </div>
-                                {event.isLive && (
-                                  <Badge variant="destructive" className="text-xs">
-                                    LIVE
-                                  </Badge>
-                                )}
-                              </div>
-                            </CardHeader>
-                            <CardContent className="pt-0">
-                              <div className="flex items-center justify-between text-xs text-gray-500 mb-2">
-                                <div className="flex items-center space-x-3">
-                                  <div className="flex items-center space-x-1">
-                                    <Calendar className="w-3 h-3" />
-                                    <span>{event.date}</span>
-                                  </div>
-                                  <div className="flex items-center space-x-1">
-                                    <Clock className="w-3 h-3" />
-                                    <span>{event.time}</span>
-                                  </div>
-                                </div>
-                              </div>
-                              <div className="flex items-center justify-between">
-                                <div className="flex items-center space-x-1 text-xs text-gray-500">
-                                  <Users className="w-3 h-3" />
-                                  <span>{event.registered.toLocaleString()} registered</span>
-                                </div>
-                                <Badge variant="secondary" className="text-xs">
-                                  {event.category}
-                                </Badge>
-                              </div>
-                            </CardContent>
-                          </Card>
-                        ))}
-                      </div>
-
-                      {/* Stats */}
-                      <div className="grid grid-cols-4 gap-6 mt-8 pt-6 border-t border-gray-200">
-                        <div className="text-center">
-                          <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-2">
-                            <Users className="w-6 h-6 text-blue-600" />
-                          </div>
-                          <div className="text-2xl font-bold text-gray-900">50K+</div>
-                          <div className="text-xs text-gray-600">Event Attendees</div>
-                        </div>
-                        <div className="text-center">
-                          <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-2">
-                            <TrendingUp className="w-6 h-6 text-green-600" />
-                          </div>
-                          <div className="text-2xl font-bold text-gray-900">85%</div>
-                          <div className="text-xs text-gray-600">Career Advancement</div>
-                        </div>
-                        <div className="text-center">
-                          <div className="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-2">
-                            <Award className="w-6 h-6 text-purple-600" />
-                          </div>
-                          <div className="text-2xl font-bold text-gray-900">200+</div>
-                          <div className="text-xs text-gray-600">Success Stories</div>
-                        </div>
-                        <div className="text-center">
-                          <div className="w-12 h-12 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-2">
-                            <Star className="w-6 h-6 text-orange-600" />
-                          </div>
-                          <div className="text-2xl font-bold text-gray-900">4.9/5</div>
-                          <div className="text-xs text-gray-600">Average Rating</div>
-                        </div>
+                        </button>
+                        <button
+                          onClick={() => {
+                            setSelectedTab("Success Stories")
+                            setIsInsightsDropdownOpen(false)
+                          }}
+                          className={`w-full text-left px-4 py-2 hover:bg-gray-100 ${
+                            selectedTab === "Success Stories" ? "bg-blue-50 text-blue-600" : "text-gray-700"
+                          }`}
+                        >
+                          Success Stories
+                        </button>
                       </div>
                     </div>
-                  </DropdownMenuContent>
-                </DropdownMenu>
+                  )}
+                </div>
               </nav>
             </div>
 
@@ -388,8 +321,12 @@ export default function CourseraHomepage() {
             <div className="flex items-center space-x-4">
               <Globe className="w-6 h-6 text-gray-600 hover:text-blue-600 cursor-pointer" />
               <Bell className="w-6 h-6 text-gray-600 hover:text-blue-600 cursor-pointer" />
-              <div className="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center text-white font-bold text-sm">
-                P
+              <div className="relative">
+                <Avatar className="w-8 h-8 cursor-pointer">
+                  <AvatarImage src="/profile-image.jpeg" alt="User profile" />
+                  <AvatarFallback className="bg-blue-600 text-white">P</AvatarFallback>
+                </Avatar>
+                <div className="absolute -bottom-1 -right-1 bg-green-500 text-white text-xs px-1 rounded">ONLINE</div>
               </div>
             </div>
           </div>
